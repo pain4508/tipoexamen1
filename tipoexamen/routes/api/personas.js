@@ -35,7 +35,16 @@ router.get('/', (req, res, next)=>{
 });//get
 
 router.get('/:id', (req, res, next)=>{
-    res.status(200).json({msg:"Not Imprement"});
+    var id = req.params.id;
+    var persona = personaCollection.filter((e, i)=>{
+        return (e.id === id);
+    }); //filter
+    if(persona.length > 0){
+        res.status(200).json(persona[0]);
+    }else{
+        res.status(404).json({});
+    }
+    
     }); //get one by Id
 
 router.post('/',(req, res, next)=>{
